@@ -144,7 +144,6 @@ a {
   }
   nav li {
     margin: 0;
-    float: left;
     display: inline-block;
     height: 98px;
     margin-bottom: 2px;
