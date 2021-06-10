@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<section>
+    <div class="title"><span>Welcome</span><span>Donate Today,<a target="_blanck" href="salfia.com">Make the world better</a></span></div> 
+    <div class="container rounded title" style="opacity: 0.8; width: 400px; height: 300px; background-color:#000">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-10">
+            <form action="" method="post" novalidate class="text-white ">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-sm" style="background-color:#ffd800;">Login</button>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+    </section>
+
+{% endblock %}

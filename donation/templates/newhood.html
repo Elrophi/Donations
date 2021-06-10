@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container bg-white newhood" style="margin-top:4%; opacity: 0.8; width: 800px;">
+<p class="mt-4">User/New-Hood/<a href="{% url 'index'%}" class="text-primary">Feed</a></p>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <legend class="text-center">Add Neighborhood</legend>
+            <form action="" method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-sm btn-success">Add Hood</button>
+            </form>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+{% endblock %}

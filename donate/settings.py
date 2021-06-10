@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'donation',
+    'crispy_forms',
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+cloudinary.config(
+    cloud_name = 'dfgpy7csp',
+    api_key = '321812322229413',
+    api_secret = 'W0PveFoMd21LNDSesA-GKketZrU',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,8 +88,10 @@ WSGI_APPLICATION = 'donate.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'testing',
+        'USER': 'el',
+    'PASSWORD':'maigoge',
     }
 }
 
@@ -117,7 +132,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'index'
+
+LOGOUT_REDIRECT_URL = 'index'
+
+
+STRIPE_PUBLIC_KEY = 'pk_test_51J0fWkAMXe4vfi269JZAahN0Tjj0Jtur0NzS0PmKs2wxRzKC50U9ocUDhwzZ8dVm9QwD4xsWTVuzITUbzvXOrf8q00xd6LeZcQ'
+STRIPE_PRIVATE_KEY = 'sk_test_51J0fWkAMXe4vfi26SvhggX7Gy3YexiQQfSppmtFckEkZaW6Nnl4TDSaTedgTlpC25bPIzfPLpNhZwWaTGBXECWiO00l6RN9ofd'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

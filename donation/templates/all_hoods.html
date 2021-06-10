@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section >
+<div class="container text-center ">
+        <a href="{% url 'new-hood' %}" class="btn btn-sm btn-secondary col-12 mb-4" style="background-color:#ffd800; font-size:25px;
+    font-weight:bold; "> Add a Donation site </a>
+    <div class="row">
+        {% for hood in page.object_list %}
+        <div class="col-md-4">
+            <div class="card " style="min-height:350px">
+                <img src="{{ hood.hood_logo.url }}" class="card-img-top" alt="{{ hood.name }}">
+                <div class="card-body">
+                    <h5 class="card-title " >Donating: {{ hood.name }} <br> Location: {{hood.location}} <br>{{hood.members.count}} member{{hood.members.count|pluralize}}</h5>
+                    <p class="card-text"><em>Note: {{hood.description}} </em></p>
+                    {% if request.user.profile.neighbourhood == hood %}
+                    <a href="{% url 'leave-hood' hood.id %}" class="btn text-secondary btn-sm"style="background-color:#ffd800; font-size:25px;font-weight:bold;">Cancel</a>
+                    {% if user.profile.neighbourhood %}
+                    <a class="btn btn-sm btn-secondary" href="{% url 'single-hood' user.profile.neighbourhood.id %}" style="font-size:25px;
+                        font-weight:bold;">
+                        &nbsp;{{user.profile.neighbourhood.name}}
+                        <!-- <i class="fas fa-paper-plane"></i>&nbsp; -->     
+                    </a>
+                    {% endif %}
+                    {% elif not request.user.profile.neighbourhood %}
+                    <a href="{% url 'join-hood' hood.id %}" class="btn btn-sm" style="background-color:#ffd800; font-size:25px;font-weight:bold;">Join Donation</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% if page.has_other_pages %}
+        <ul class="pagination">
+                {% if page.has_previous %}
+                <li><a class="text-white" href="?page={{page.previous_page_number}}">&laquo; Previous</a></li>
+                {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+                {%endif%}
+                {% for i in page.paginator.page_range %}
+                {% if page.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>               
+                {%endif%}
+                {% endfor %}
+                {% if page.has_next %}
+                <a class="text-white" href="?page={{page.next_page_number}}">&raquo; Next</a>
+                {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+                {%endif%}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+</section>
+{% endblock %}

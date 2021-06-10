@@ -1,0 +1,62 @@
+{%load static%}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    </head>
+        <nav>              
+                    <ul>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'profile' user.username %}">
+                                &nbsp; Profile
+                                <img class="rounded-circle nav-img"src="{{ user.profile.profile_picture.url }}" alt="">    
+                            </a>
+                
+                        </li>
+                        <li>
+                            <a href="{% url 'edit-profile' user.username %}">
+                                &nbsp; Edit Profile                        
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'hood' %}">
+                                &nbsp; Donate
+                            </a>
+                        </li>  
+                        <li>                  
+                        <a href="{% url 'logout' %}"> Logout</a>  
+                        </li> 
+                        <li>
+                            <form class="form-inline" method="get" action="{% url 'search' %}">
+                                {% csrf_token %}
+                                <div class="md-form my-0">
+                                    <input class="form-control mr-sm-2 " type="text" placeholder="Search Donation" name="title" aria-label="Search">
+                                </div>
+                            </form>
+                        </li>
+                        <li class="slide">                  
+                            <a href="{% url 'logout' %}"></a>  
+                            </li> 
+                        {% else %}
+                        <li>
+                            <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                        </l>
+                        <li>
+                            <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                        </li>
+                        <li class="slide">                  
+                            <a href="{% url 'login' %}"></a>  
+                            </li> 
+                        {% endif %}
+                </ul>
+        </nav>
+    <!-- <section>
+      <div class="title"><span>Welcome</span><span>Donate Today,<a target="_blanck" href="salfia.com">Make the world better</a></span></div>
+    </section> -->
+
+
+    <style>
+        
+    </style>

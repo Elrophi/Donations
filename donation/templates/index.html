@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section>
+    <div class="title ml-3"><span>Welcome</span><span>Join Today,<a target="_blanck" href="salfia.com">Be a Partner</a></span></div>
+    <div class="title container rounded mr-3" style="opacity: 0.8; width: 800px; background-color: #ffd800;"> 
+        <div class="text-center text-dark" style="margin-top:17%">
+            <h1 style="color: #f7eccd;">DONATE TODAY!</h1>
+            <hr class="bg-white">
+            <h3 style="color: #f7eccd;">A donation is a gift for charity, humanitarian aid, or to benefit a cause. A donation may satisfy medical needs such as blood or organs for transplant.</h3>
+            <a href="{% url 'hood' %}" class="btn col-6 mt-4 mb-4" style="background-color:#f5efdf; font-size:25px;font-weight:bold; color: #ffd800;">Donate to an Organization</a>
+        </div>
+    
+    </div> 
+  </section>
+
+{% endblock %}
